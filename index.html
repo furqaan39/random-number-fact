@@ -4,12 +4,63 @@
   <meta charset="utf-8">
   <meta description="This App Generates Random Number Fact Using Ajax and XHR">
   <title>Random Number Facts</title>
+  <style>
+    .container{
+			width: 400px;
+			margin: 0 auto;
+			text-align: center;
+			background: #f4f4f4;
+			padding: 1rem;
+		}
+		#btn{
+			margin-bottom: 1rem;
+			padding: .5rem 1rem;
+			background: black;
+			color: white;
+			border: none;
+			border-radius: 3px;
+			font-size: 1rem;
+		}
+		#quote{
+			font-size: 1.35rem;
+			letter-spacing: 1px;
+			font-weight: bold;
+		}
+  </style>
 </head>
 <body>
   
   <div class="container">
   	<button id="btn">Random Number Fact</button>
-  <div id="quote"></div>
-</div>
+    <div id="quote"></div>
+  </div>
+  
+  <script>
+    let quote = document.getElementById('quote');
+		
+    document.getElementById('btn').addEventListener('click',getText);
+
+
+		// console.log(randomNumber);
+
+function getText(){
+
+
+  let randomNumber = Math.floor((Math.random() * 100) + 1);
+
+	let xhr = new XMLHttpRequest();
+			  
+	xhr.open('GET','http://numbersapi.com/'+randomNumber+'/math',true);
+			  
+	xhr.onload = function(){
+	  if(this.status == 200){
+      quote.innerHTML = this.responseText;
+      console.log(this.responseText);
+			}    
+		}
+			  
+		xhr.send();
+}
+  </script>
 </body>
 </html>
